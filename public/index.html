@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-functions.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Firebase Functions</title>
+  </head>
+  <body>
+    <div class="notification"></div>
+
+    <!-- auth modals -->
+    <div class="auth open">
+      <div class="modal">
+        <h2>Login</h2>
+        <form class="login">
+          <input type="text" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <button>Login</button>
+          <p class="error"></p>
+        </form>
+        <div>No account? <a class="switch"> Register instead</a></div>
+        <br />
+        <div>Forgot Password?<a href="reset.html">Reset Password</a></div>
+      </div>
+      <div class="modal">
+        <h2>Register</h2>
+        <form class="register">
+          <input type="text" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <button>Register</button>
+          <p class="error"></p>
+        </form>
+        <div>Got an account? <a class="switch">Login instead</a></div>
+      </div>
+    </div>
+
+    <!-- new request modal -->
+    <div class="new-request">
+      <div class="modal">
+        <h2>Request a Tutorial</h2>
+        <form>
+          <input type="text" name="request" placeholder="Request..." />
+          <button id="submitRequest">Submit Request</button>
+          <p class="error"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Account Modal-->
+    <div class="account-modal">
+      <div class="modal">
+        <div class="modal-content center-align">
+          <h2>Account details</h2>
+          <div class="account-details"></div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <nav>
+        <a class="accountInfo">Account details</a>
+        <a class="add-request">add request</a>
+        <a class="sign-out">sign out</a>
+      </nav>
+    </header>
+
+    <section class="content" id="app">
+      <h1>Tutorial Requests</h1>
+      <ul class="request-list">
+        <li v-for="req in req">
+          <span class="text"> {{req.text}} </span>
+          <div>
+            <span class="votes"> {{req.upvotes}} </span>
+            <i class="material-icons upvote" v-on:click="upvotedRequest(req.id)"
+              >arrow_upward</i
+            >
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyC_BxF49S3755o_MUWCysSRJGl-KxlBGww",
+        authDomain: "matty-todoapp.firebaseapp.com",
+        databaseURL: "https://matty-todoapp.firebaseio.com",
+        projectId: "matty-todoapp",
+        storageBucket: "matty-todoapp.appspot.com",
+        messagingSenderId: "188505283876",
+        appId: "1:188505283876:web:c4d9312a56c5b5262da7b1",
+        measurementId: "G-NZ5JF6RFCV",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/requests.js"></script>
+    <script src="js/reset.js"></script>
+  </body>
+</html>
